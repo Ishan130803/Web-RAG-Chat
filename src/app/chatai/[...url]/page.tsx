@@ -1,7 +1,7 @@
 import { redis } from "@/lib/redis";
 import { Chatwrapper } from "@/components/Chatwrapper";
 import { cookies } from "next/headers";
-import { fetchAndSave, ragChat } from "@/lib/rag-chat";
+import { fetchAndGet, fetchAndSave, ragChat } from "@/lib/rag-chat";
 
 type PageProps = {
   params: {
@@ -30,14 +30,13 @@ async function Page({ params }: PageProps) {
 
   if (!isPresent) {
     try {
-      await fetchAndSave("./temp.htm", constructedUrl);
-
+      await fetchAndSave("/tmp/temp.htm",constructedUrl)
       await ragChat.context.add({
         type: "html",
         options: {
           namespace: sessionId,
         },
-        fileSource: "./temp.htm",
+        fileSource: "/tmp/temp.htm",
         processor: {
           name: "unstructured",
           options: { apiKey: process.env.UNSTRUCTURED_IO_KEY },

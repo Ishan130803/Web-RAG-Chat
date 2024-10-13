@@ -45,3 +45,15 @@ export async function fetchAndSave(fileSource: string, url: string) {
     console.error("Error fetching the website", error);
   }
 }
+
+export async function fetchAndGet(url: string) {
+  try {
+    const response = await fetch(url);
+    const html = await response.text();
+    console.log(`File Successfully Extracted`);
+    return html as string
+  } catch (error) {
+    console.error("Error fetching the website", error);
+    return ""
+  }
+}
