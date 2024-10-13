@@ -18,7 +18,7 @@ function Messages({ messages }: MessagesProps) {
   }, [messages]);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full mx-auto flex flex-col gap-2 ">
       {messages ? (
         messages.map((mes, i) =>
           i == messages.length - 1 ? (

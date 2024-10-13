@@ -12,10 +12,10 @@ const Message = forwardRef<HTMLDivElement, MessageProps>(
     return (
       <div
         ref={ref}
-        className={cn("p-6 w-full max-h-full flex items-center gap-6", {
+        className={cn("p-6 w-full max-h-full flex items-center gap-6 rounded-3xl", {
           //@ts-expect-error
-          "bg-zinc-800": isUserMessage,
-          "bg-zinc-900/25": !isUserMessage,
+          "bg-zinc-800": !isUserMessage,
+          "bg-zinc-900/25": isUserMessage,
         })}
       >
         {/* <div

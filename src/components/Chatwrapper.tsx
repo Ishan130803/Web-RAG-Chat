@@ -22,10 +22,9 @@ function Chatwrapper({ sessionId, initialMessages }: ChatwrapperProps) {
       initialMessages: initialMessages,
     });
   const dummy_parsed = JSON.parse(dummyJSONString) as TMessage[];
-  console.log("Hello",messages);
   return (
-    <div className="relative h-screen bg-zinc-900 flex divide-y divide-zinc-700 flex-col justify-between gap-2">
-      <div className="flex-1 bg-zinc-800 justify-between flex flex-col overflow-auto">
+    <div className="relative h-screen flex divide-y divide-zinc-700 flex-col justify-between w-4/5 mx-auto gap-2">
+      <div className="flex-1 justify-between flex flex-col overflow-auto">
         <Messages messages={messages}></Messages>
       </div>
       <ChatInput

@@ -35,7 +35,7 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <main className="h-screen dark text-foreground bg-background">
+          <main className="h-screen dark text-foreground bg-primary-foreground">
             {children}
           </main>
         </Providers>

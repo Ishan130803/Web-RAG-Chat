@@ -23,11 +23,10 @@ function ChatInput({
   return (
     // <div className="z-10 bg-zinc-900 absolute bottom-0 left-0 w-full">
     //   <div className="m-2 flex flex-row gap-3 md:mx-4 justify-center ">
-    <div className={cn("flex gap-2 p-3", className)}>
-      <form onSubmit={handleSubmit} className="contents">
+      <form onSubmit={handleSubmit} className="p-3 flex gap-2 bg-transparent">
         <Textarea
           placeholder="Enter Your Query....."
-          className="text-accent-foreground font-sans bg-secondary rounded-3xl ring-[1px] focus-within:ring focus:ring focus-visible:ring "
+          className="text-accent-foreground font-mono bg-secondary rounded-xl ring-[1px] focus-within:ring focus:ring focus-visible:ring "
           minRows={1}
           maxRows={10}
           autoFocus
@@ -43,13 +42,12 @@ function ChatInput({
           }}
         ></Textarea>
         <Button
-          className=" flex-grow-0 rounded-full bg-secondary"
+          className=" flex-grow-0 rounded-full bg-foreground text-black flex items-center justify-center w-4"
           type="submit"
         >
           <Send></Send>
         </Button>
       </form>
-    </div>
   );
 }
 

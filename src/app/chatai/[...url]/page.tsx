@@ -1,7 +1,7 @@
 import { redis } from "@/lib/redis";
 import { Chatwrapper } from "@/components/Chatwrapper";
 import { cookies } from "next/headers";
-import { ragChat } from "@/lib/rag-chat";
+import { fetchAndSave, ragChat } from "@/lib/rag-chat";
 
 type PageProps = {
   params: {
@@ -23,23 +23,44 @@ async function Page({ params }: PageProps) {
 
   const sessionId = (constructedUrl + "--" + sessionCookie).replace(/\//g, "");
 
-  const messages = await ragChat.history.getMessages({ amount: 10, sessionId });
+  const messages = await ragChat.history.getMessages({
+    sessionId: sessionId,
+    amount: 100,
+  });
 
   if (!isPresent) {
-    await ragChat.context.add({
-      type: "html",
-      source: constructedUrl,
-      config: {
-        chunkOverlap: 50,
-        chunkSize: 200,
-      },
-    });
+    try {
+      await fetchAndSave("./temp.htm", constructedUrl);
 
-    await redis.sadd("indexed-urls", constructedUrl);
+      await ragChat.context.add({
+        type: "html",
+        options: {
+          namespace: sessionId,
+        },
+        fileSource: "./temp.htm",
+        processor: {
+          name: "unstructured",
+          options: { apiKey: process.env.UNSTRUCTURED_IO_KEY },
+        },
+        htmlConfig: {
+          maxConcurrency: 2,
+        },
+      });
+
+      await redis.sadd("indexed-urls", constructedUrl);
+      console.log("Here");
+    } catch {
+      console.log("Failed to Fetch")
+    }
   }
 
   return (
-    <Chatwrapper sessionId={sessionId} initialMessages={messages}></Chatwrapper>
+    <div className="w-full h-full">
+      <Chatwrapper
+        sessionId={sessionId}
+        initialMessages={messages}
+      ></Chatwrapper>
+    </div>
   );
 }
 
