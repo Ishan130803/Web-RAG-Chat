@@ -6,7 +6,8 @@
     "dev": "next dev --port 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@nextui-org/react": "^2.4.8",
@@ -19,6 +20,7 @@
     "dotenv": "^16.4.5",
     "lucide-react": "^0.452.0",
     "next": "14.2.14",
+    "patch-package": "^8.0.0",
     "react": "^18",
     "react-dom": "^18",
     "react-type-animation": "^3.2.0",
