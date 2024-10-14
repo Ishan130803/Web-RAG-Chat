@@ -50,7 +50,7 @@ export async function getUserChatMetaData(userId: string) {
 export async function createIndexAndGetChatId(userId: string, url: string) {
   let namespaceId: string;
 
-  const temp_path = process.env.NODE_ENV === "development" ? process.cwd() + "/tmp/temp.htm" : "/tmp"
+  const temp_path = process.env.NODE_ENV === "development" ? process.cwd() + "/tmp/temp.htm" : "/tmp/temp.htm"
 
   if (await redis.hexists("url_has_namespace", url)) {
     namespaceId = (await redis.hget("url_has_namespace", url))!;
