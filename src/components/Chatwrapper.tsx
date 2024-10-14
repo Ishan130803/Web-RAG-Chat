@@ -10,29 +10,41 @@ const dummyJSONString = `[{"id":"0o2khJA","createdAt":"2024-10-12T08:05:28.670Z"
 type ChatwrapperProps = {
   sessionId: string;
   initialMessages: TMessage[];
+  namespaceId: string;
 };
 
-function Chatwrapper({ sessionId, initialMessages }: ChatwrapperProps) {
+function Chatwrapper({
+  sessionId,
+  initialMessages,
+  namespaceId,
+}: ChatwrapperProps) {
   const { messages, handleInputChange, input, handleSubmit, setInput } =
     useChat({
       api: "/api/chat",
       body: {
         sessionId,
+        namespaceId,
       },
       initialMessages: initialMessages,
     });
+  console.log(messages);
+
   const dummy_parsed = JSON.parse(dummyJSONString) as TMessage[];
   return (
-    <div className="relative h-screen flex divide-y divide-zinc-700 flex-col justify-between w-4/5 mx-auto gap-2">
-      <div className="flex-1 justify-between flex flex-col overflow-auto">
-        <Messages messages={messages}></Messages>
+    <div className="relative w-full h-screen flex divide-y divide-accent flex-col justify-between mx-auto gap-2">
+      <div className="overflow-auto flex justify-center h-full">
+        <div className="w-4/5">
+          <Messages messages={messages}></Messages>
+        </div>
       </div>
-      <ChatInput
-        handleInputChange={handleInputChange}
-        handleSubmit={handleSubmit}
-        input={input}
-        setInput={setInput}
-      ></ChatInput>
+      <div className="w-4/5 self-center">
+        <ChatInput
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          input={input}
+          setInput={setInput}
+        ></ChatInput>
+      </div>
     </div>
   );
 }

@@ -14,12 +14,15 @@ function Messages({ messages }: MessagesProps) {
     lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
   };
   useEffect(() => {
-    scrollToBottom();
+    if (messages.length) {
+      scrollToBottom();
+    }
   }, [messages]);
+
 
   return (
     <div className="w-full h-full mx-auto flex flex-col gap-2 ">
-      {messages ? (
+      {messages.length ? (
         messages.map((mes, i) =>
           i == messages.length - 1 ? (
             <Message
@@ -37,9 +40,9 @@ function Messages({ messages }: MessagesProps) {
           )
         )
       ) : (
-        <div className="flex-1 flex flex-col items-center justify-center gap-2">
+        <div className="w-full h-full flex-1 flex flex-col items-center justify-center gap-2">
           <MessageSquare className="size-8 text-blue-500" />
-          <h3 className="font-semibold text-xl text-white">You're all Set!</h3>
+          <h3 className="font-semibold text-2xl text-foreground">You're all Set!</h3>
           <p className="text-zinc-500 text-sm">
             Ask Your first question to get started
           </p>

@@ -42,7 +42,7 @@ function ChatInput({
           }}
         ></Textarea>
         <Button
-          className=" flex-grow-0 rounded-full bg-foreground text-black flex items-center justify-center w-4"
+          className=" flex-grow-0 rounded-full bg-foreground text-background flex items-center justify-center w-4 hover:bg-background hover:text-foreground duration-500 transition-colors"
           type="submit"
         >
           <Send></Send>

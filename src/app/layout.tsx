@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "../lib/utils";
-import { Providers } from "@/components/Providers";
+import { Providers } from "@/components/providers/Providers";
+import { ThemeToggleButton } from "@/components/ThemeToggleButton";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,7 +36,9 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <main className="h-screen dark text-foreground bg-primary-foreground">
+          <ThemeToggleButton className="fixed right-0 top-0 m-2"></ThemeToggleButton>
+
+          <main className="h-screen text-foreground bg-secondary">
             {children}
           </main>
         </Providers>
