@@ -50,14 +50,16 @@ export async function getUserChatMetaData(userId: string) {
 export async function createIndexAndGetChatId(userId: string, url: string) {
   let namespaceId: string;
 
+  const temp_path = process.env.NODE_ENV === "development" ? process.cwd() + "/tmp/temp.htm" : "/tmp"
+
   if (await redis.hexists("url_has_namespace", url)) {
     namespaceId = (await redis.hget("url_has_namespace", url))!;
   } else {
     namespaceId = crypto.randomUUID();
-    await fetchAndSave(process.cwd() + "/tmp/temp.htm", url);
+    await fetchAndSave(temp_path, url);
     await ragChat.context.add({
       type: "html",
-      fileSource: process.cwd() + "/tmp/temp.htm",
+      fileSource: temp_path,
       options: {
         namespace: namespaceId,
       },
