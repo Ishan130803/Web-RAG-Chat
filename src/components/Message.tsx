@@ -13,7 +13,6 @@ const Message = forwardRef<HTMLDivElement, MessageProps>(
       <div
         ref={ref}
         className={cn("p-6 w-full max-h-full flex items-center gap-6 rounded-3xl", {
-          //@ts-expect-error
           "bg-card": !isUserMessage,
           "bg-transparent": isUserMessage,
         })}
