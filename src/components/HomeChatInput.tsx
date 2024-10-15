@@ -21,8 +21,6 @@ function HomeChatInput({ className = "" }: HomeChatInputProps) {
   function submitHandler(e: FormInputs) {
     // e.preventDefault()
     const url = e.url;
-    console.log(e);
-    console.log(url);
     router.push(`/chatai/${url}`);
   }
   return (
