@@ -1,3 +1,4 @@
+"use client"
 import { cn } from "@/lib/utils";
 import {
   Context,
@@ -31,7 +32,15 @@ type IdarkThemeContextProviderProps = PropsWithChildren;
 export const DarkThemeContextProvider: React.FC<
   IdarkThemeContextProviderProps
 > = (props) => {
-  const [dark, setdark] = useState<boolean>(true);
+  let theme = "dark";
+  if (typeof window !== 'undefined') {
+    theme = localStorage.getItem('Theme')!
+    if (!theme) {
+      localStorage.setItem("Theme", "dark")
+    }
+  }
+  const [dark, setdark] = useState<boolean>(theme === "dark");
+  
 
   return (
     <darkThemeContext.Provider
@@ -43,7 +52,6 @@ export const DarkThemeContextProvider: React.FC<
       <div
         className={cn("contents", {
           "dark": dark,
-          "": !dark,
         })}
       >
         {props.children}

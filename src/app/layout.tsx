@@ -38,7 +38,7 @@ export default function RootLayout({
         <Providers>
           <ThemeToggleButton className="fixed right-0 top-0 m-2"></ThemeToggleButton>
 
-          <main className="h-screen text-foreground bg-secondary">
+          <main className="h-screen w-screen text-foreground bg-secondary overflow-y-auto">
             {children}
           </main>
         </Providers>
