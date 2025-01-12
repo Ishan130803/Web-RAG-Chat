@@ -2,7 +2,9 @@
 > [!NOTE]
 > Currently due to breaking changes in upstash vector store, this website is broken so many features will not work
 ### About the project
-This project is made using Upstash RAG chat and leverages Upstash Redis for chat storage and retrieval and Upstash RAG Chat API to chat with the website. 
+
+
+It uses Upstash RAG chat API for chatting with the LLM Model and leverages Upstash Redis for chat storage and retrieval and Upstash RAG Chat API to chat with the website. Upstash vector store stores the documents in vector format for each website. 
 
 Vercel's ai SDK is used for streaming of response.
 
